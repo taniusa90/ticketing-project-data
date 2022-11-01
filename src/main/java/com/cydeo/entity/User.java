@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -25,6 +22,7 @@ public class User extends BaseEntity {
     private String passWord;
     private boolean enabled;
     private String phone;
+    @ManyToOne
     private Role role;
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -32,4 +30,3 @@ public class User extends BaseEntity {
 
     }
 
-}
