@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService{
         userRepository.save(userMapper.convertToEntity(user));
 
     }
-   @Transactional
+
     @Override
     public void deleteByUserName(String username) {
 
