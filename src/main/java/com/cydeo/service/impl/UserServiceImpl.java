@@ -55,12 +55,30 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDTO update(UserDTO user) {
         //Find current user
-        User user1=userRepository.findByUserName(user.getUserName());//has id
-        User convertedUser=userMapper.convertToEntity(user);
+        User user1=userRepository.findByUserName(user.getUserName());//has id WE GET THE USER IN DB
+        User convertedUser=userMapper.convertToEntity(user);//WE CONVERT USER DTO CAME FROM UI TO THE ENTITY
         //set id to the converted object
         convertedUser.setId(user1.getId());
         userRepository.save(convertedUser);
+      return findByUserName(user.getUserName());
 
-        return findByUserName(user.getUserName());
+    }
+
+    @Override
+    public void delete(String username) {
+        User user=userRepository.findByUserName(username);
+        user.setIsDeleted(true);
+        userRepository.save(user);
+        //go to db and get the user with user name
+        //change the isdeleted field to true
+        //save the obj in the db
+    }
+
+    @Override
+    public List<UserDTO> listAllByRole(String role) {
+        //go to the db amd bring the specific role
+        List<User>users = userRepository.findByRoleDescriptionIgnoreCase(role);
+
+        return users.stream().map(userMapper::convertToDto).collect(Collectors.toList());
     }
 }
