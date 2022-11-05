@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService{
 
+
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
@@ -26,59 +27,60 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<UserDTO> listAllUsers() {
 
-        List<User> userList=userRepository.findAll(Sort.by("firstName"));
-
+        List<User> userList = userRepository.findAll(Sort.by("firstName"));
         return userList.stream().map(userMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
     public UserDTO findByUserName(String username) {
-        User user =userRepository.findByUserName(username);
+
+        User user = userRepository.findByUserName(username);
         return userMapper.convertToDto(user);
-        //
     }
 
     @Override
     public void save(UserDTO user) {
         userRepository.save(userMapper.convertToEntity(user));
-
     }
 
     @Override
     public void deleteByUserName(String username) {
 
         userRepository.deleteByUserName(username);
-
-
     }
 
     @Override
     public UserDTO update(UserDTO user) {
+
         //Find current user
-        User user1=userRepository.findByUserName(user.getUserName());//has id WE GET THE USER IN DB
-        User convertedUser=userMapper.convertToEntity(user);//WE CONVERT USER DTO CAME FROM UI TO THE ENTITY
+        User user1 = userRepository.findByUserName(user.getUserName());  //has id
+        //Map update user dto to entity object
+        User convertedUser = userMapper.convertToEntity(user);   // has id?
         //set id to the converted object
         convertedUser.setId(user1.getId());
+        //save the updated user in the db
         userRepository.save(convertedUser);
-      return findByUserName(user.getUserName());
+
+        return findByUserName(user.getUserName());
 
     }
 
     @Override
     public void delete(String username) {
-        User user=userRepository.findByUserName(username);
+
+        User user = userRepository.findByUserName(username);
         user.setIsDeleted(true);
         userRepository.save(user);
-        //go to db and get the user with user name
-        //change the isdeleted field to true
-        //save the obj in the db
+
     }
 
     @Override
     public List<UserDTO> listAllByRole(String role) {
-        //go to the db amd bring the specific role
-        List<User>users = userRepository.findByRoleDescriptionIgnoreCase(role);
+
+        List<User> users = userRepository.findByRoleDescriptionIgnoreCase(role);
 
         return users.stream().map(userMapper::convertToDto).collect(Collectors.toList());
     }
-}
+
+    }
+

@@ -8,11 +8,18 @@ import javax.validation.constraints.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+
 public class UserDTO {
 
     private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @NotBlank
     @Size(max = 15, min = 2)
@@ -44,6 +51,8 @@ public class UserDTO {
 
     @NotNull
     private Gender gender;
+
+
 
     public String getPassWord() {
         return passWord;

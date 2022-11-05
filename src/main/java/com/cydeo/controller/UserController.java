@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/create")
-    public String createUser(Model model){
+    public String createUser(Model model) {
 
         model.addAttribute("user", new UserDTO());
         model.addAttribute("roles", roleService.listAllRoles());
@@ -83,10 +83,12 @@ public class UserController {
 
     @GetMapping("/delete/{username}")
     public String deleteUser(@PathVariable("username") String username) {
+//        userService.deleteByUserName(username);
         userService.delete(username);
         return "redirect:/user/create";
-    }
 
+
+    }
 }
 
 
