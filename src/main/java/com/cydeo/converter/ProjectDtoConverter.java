@@ -13,19 +13,20 @@ public class ProjectDtoConverter implements Converter<String, ProjectDTO> {
     ProjectService projectService;
 
     public ProjectDtoConverter(ProjectService projectService) {
-       this.projectService = projectService;
+        this.projectService = projectService;
     }
 
     @Override
     public ProjectDTO convert(String source) {
 
-       if (source == null || source.equals("")) {
-           return null;
-       }
+        if (source == null || source.equals("")) {
+            return null;
+        }
 
         return projectService.getByProjectCode(source);
 
+    }
    }
 
-}
+
 

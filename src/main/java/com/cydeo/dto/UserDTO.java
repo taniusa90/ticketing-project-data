@@ -52,8 +52,6 @@ public class UserDTO {
     @NotNull
     private Gender gender;
 
-
-
     public String getPassWord() {
         return passWord;
     }
@@ -135,5 +133,4 @@ public class UserDTO {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
-
 }

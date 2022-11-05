@@ -8,11 +8,13 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    //get User based on username
     User findByUserName(String username);
+
     @Transactional
     void deleteByUserName(String username);
+
     List<User> findByRoleDescriptionIgnoreCase(String description);
+
 
 
 }

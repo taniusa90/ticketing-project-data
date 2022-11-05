@@ -24,5 +24,6 @@ public class ProjectMapper {
 
         return modelMapper.map(entity,ProjectDTO.class);
     }
+    }
 
-}
+
