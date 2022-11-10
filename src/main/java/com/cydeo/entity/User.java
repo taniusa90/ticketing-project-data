@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-@Where(clause ="is_deleted=false")//any repo wich is using user entity if the querie is have that clasu all the is deleted
+@Where(clause ="is_deleted=false")//any repo which is using user entity if the queried is had that class all the is deleted // // SELECT * FROM users WHERE id = 4 AND is_deleted = false;
 public class User extends BaseEntity {
 
     private String firstName;
